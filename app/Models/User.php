@@ -44,12 +44,12 @@ class User extends Authenticatable
 
     public function home()
     {
-        return $this->hasOne('App\Models\Home');
+        return $this->hasOne('App\Models\Home', 'admin_id');
     }
 
     public function scholarships()
     {
-        return $this->hasMany('App\Models\Scholarship');
+        return $this->hasMany('App\Models\Scholarship', 'scholar_id');
     }
 
     public function profile()

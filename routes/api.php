@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Http\Request;
+//include App\Http\Controllers\AcademicLavelController;
 
 /*
 |--------------------------------------------------------------------------
@@ -13,12 +14,5 @@ use Illuminate\Http\Request;
 |
 */
 
-Route::get('user', function () {
-    return $array = Arr::add(['name' => 'Desk'], 'price', 100);
-});
 
-Route::get('ver', function(){
-    return 'hola';
-});
-
-Route::resource('ver','EstudianteController');
+Route::get('ver', 'AcademicLavelController@index')->name('ver.index');

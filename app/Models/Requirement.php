@@ -13,6 +13,6 @@ class Requirement extends Model
 
     public function scholarships()
     {
-        return $this->hasMany('App\Models\Scholarship');
+        return $this->hasMany('App\Models\Scholarship', 'requirements_id');
     }
 }

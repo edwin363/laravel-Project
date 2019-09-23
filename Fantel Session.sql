@@ -1,1 +1,1 @@
-select * from applicants;
+select * from profiles
