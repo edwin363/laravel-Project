@@ -13,6 +13,12 @@ use Illuminate\Http\Request;
 |
 */
 
-Route::middleware('auth:api')->get('/user', function (Request $request) {
-    return $request->user();
+Route::get('user', function () {
+    return $array = Arr::add(['name' => 'Desk'], 'price', 100);
 });
+
+Route::get('ver', function(){
+    return 'hola';
+});
+
+Route::resource('ver','EstudianteController');

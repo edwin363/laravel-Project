@@ -14,3 +14,11 @@
 Route::get('/', function () {
     return view('welcome');
 });
+
+// Route::get('ver', function(){
+//     return 'hola';
+// });
+
+Route::get('/user', function () {
+    return $array = Arr::add(['name' => 'Desk'], 'price', 100);
+});
