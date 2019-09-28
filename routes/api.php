@@ -1,7 +1,11 @@
 <?php
 
 use Illuminate\Http\Request;
-//include App\Http\Controllers\AcademicLavelController;
+
+header('Access-Control-Allow-Origin: *');
+//Access-Control-Allow-Origin: *
+header('Access-Control-Allow-Methods:  POST, GET, OPTIONS, PUT, DELETE');
+header('Access-Control-Allow-Headers:  Content-Type, X-Auth-Token, Origin, Authorization');
 
 /*
 |--------------------------------------------------------------------------
@@ -14,5 +18,63 @@ use Illuminate\Http\Request;
 |
 */
 
+#Rutas de la tabla academic_level
+Route::get('/academiclevel', 'AcademicLevelController@index');
+Route::post('/academiclevel', 'AcademicLevelController@store');
+Route::put('/academiclevel/{id}', 'AcademicLevelController@update');
+Route::delete('/academiclevel/{id}', 'AcademicLevelController@destroy');
 
-Route::get('ver', 'AcademicLavelController@index')->name('ver.index');
+#Rutas de la tabla scholarships_type
+Route::get('/scholarshiptype', 'ScholarshipTypeController@index');
+Route::post('/scholarshiptype', 'ScholarshipTypeController@store');
+Route::put('/scholarshiptype/{id}', 'ScholarshipTypeController@update');
+Route::delete('/scholarshiptype/{id}', 'ScholarshipTypeController@destroy');
+
+#Rutas de la tabla territories
+Route::get('/territories', 'TerritoryController@index');
+Route::post('/territories', 'TerritoryController@store');
+Route::put('/territories/{id}', 'TerritoryController@update');
+Route::delete('/territories/{id}', 'TerritoryController@destroy');
+
+#Rutas de la tabla users_type
+Route::get('/usertypes', 'UserTypeController@index');
+Route::post('/usertypes', 'UserTypeController@store');
+Route::put('/usertypes/{id}', 'UserTypeController@update');
+Route::delete('/usertypes/{id}', 'UserTypeController@destroy');
+
+#Rutas de la tabla repositories
+Route::get('/repositories', 'Repository@index');
+Route::post('/repositories', 'Repository@store');
+Route::put('/repositories/{id}', 'Repository@update');
+Route::delete('/repositories/{id}', 'Repository@destroy');
+
+#Rutas de la tabla countries
+Route::get('/countries', 'CountryController@index');
+Route::post('/countries', 'CountryController@store');
+Route::put('/countries/{id}', 'CountryController@update');
+Route::delete('/countries/{id}', 'CountryController@destroy');
+
+#Rutas de la tabla users
+Route::get('/users','UserController@index');
+Route::post('/users','UserController@store');
+Route::put('/users/{id}','UserController@update');
+Route::delete('/users/{id}','UserController@destroy');
+
+#Rutas de la tabla universities
+Route::get('/universities', 'UniversityController@index');
+Route::post('/universities', 'UniversityController@store');
+Route::put('/universities/{id}', 'UniversityController@update');
+ROute::delete('/universities/{id}', 'UniversityController@destroy');
+Route::get('/universities/country/{id}', 'UniversityController@universityByCountryId');
+
+#Rutas de la tabla careers
+Route::get('/careers', 'CareerController@index');
+Route::post('/careers', 'CareerController@store');
+Route::put('/careers/{id}', 'CareerController@update');
+Route::delete('/careers/{id}', 'CareerController@destroy');
+Route::get('/careers/university/{id}', 'CareerController@careerByUniversityId');
+
+
+Route::post('/users', 'UserController@store');
+Route::post('/prueba', 'UserController@prueba');
+Route::delete('/users/{id}', 'UserController@destroy');

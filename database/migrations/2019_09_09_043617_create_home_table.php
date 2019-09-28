@@ -19,8 +19,6 @@ class CreateHomeTable extends Migration
             $table->string('information',200);
             $table->unsignedBigInteger('admin_id');
             $table->foreign('admin_id')->references('id')->on('users');
-            $table->unsignedBigInteger('user_type_id');
-            $table->foreign('user_type_id')->references('id')->on('users_type');
             $table->timestamps();
         });
     }

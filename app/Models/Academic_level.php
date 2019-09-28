@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Academic_level extends Model
 {
-    protected $table = 'academic_levels';
+    //protected $table = 'academic_levels';
 
     public function requirement()
     {
