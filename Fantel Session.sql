@@ -18,3 +18,5 @@ select * from scholarships
 select * from role_user
 
 select * from roles
+
+select * from home

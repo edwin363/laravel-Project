@@ -6,11 +6,6 @@ use Illuminate\Database\Eloquent\Model;
 
 class Scholarship extends Model
 {
-    public function contract()
-    {
-        return $this->belongsTo('App\Models\Contract');
-    }
-
     public function requirement()
     {
         return $this->belongsTo('App\Models\Requirement');

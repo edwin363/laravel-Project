@@ -15,6 +15,9 @@ class CreateScholarshipsDetailTable extends Migration
     {
         Schema::create('scholarships_detail', function (Blueprint $table) {
             $table->bigIncrements('id');
+            $table->string('information', 200)->nullable();
+            $table->unsignedBigInteger('territory_id');
+            $table->foreign('territory_id')->references('id')->on('territories');
             $table->unsignedBigInteger('scholarship_type_id');
             $table->foreign('scholarship_type_id')->references('id')->on('scholarships_type');
             $table->unsignedBigInteger('country_id');

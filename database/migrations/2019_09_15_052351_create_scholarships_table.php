@@ -21,8 +21,6 @@ class CreateScholarshipsTable extends Migration
             $table->unsignedBigInteger('scholarship_detail_id');
             $table->foreign('scholarship_detail_id')->references('id')->on('scholarships_detail');
             $table->string('state', 20);
-            $table->unsignedBigInteger('contract_id');
-            $table->foreign('contract_id')->references('id')->on('contracts');
             $table->integer('quotas');
             $table->unsignedBigInteger('scholar_id');
             $table->foreign('scholar_id')->references('id')->on('users');

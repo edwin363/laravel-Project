@@ -8,8 +8,8 @@ class Territory extends Model
 {
     protected $table = 'territories';
 
-    public function contracts()
+    public function scholarchips_detail()
     {
-        return $this->hasMany('App\Models\Contract');
+        return $this->hasMany('App\Models\Scholarship_detail');
     }
 }

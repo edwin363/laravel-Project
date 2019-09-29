@@ -32,4 +32,9 @@ class Scholarship_detail extends Model
     {
         return $this->belongsTo('App\Models\Career');
     }
+
+    public function territory()
+    {
+        return $this->belongsTo('App\Models\Territory');
+    }
 }
