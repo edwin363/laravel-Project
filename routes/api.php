@@ -74,9 +74,9 @@ Route::put('/careers/{id}', 'CareerController@update');
 Route::delete('/careers/{id}', 'CareerController@destroy');
 Route::get('/careers/university/{id}', 'CareerController@careerByUniversityId');
 
-
+#Rutas de la tabla users
 Route::post('/users', 'UserController@store');
-Route::post('/prueba', 'UserController@prueba');
+Route::post('/login', 'UserController@login');
 Route::delete('/users/{id}', 'UserController@destroy');
 
 

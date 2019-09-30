@@ -6,7 +6,6 @@ use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use App\Models\User;
 use App\Models\Role;
-use App\Models\UserRole;
 use DB;
 
 class UserController extends Controller
@@ -36,16 +35,24 @@ class UserController extends Controller
      * @return \Illuminate\Http\Response
      */
 
-    public function prueba(Request $request){
+    public function login(Request $request){
         try {
             $request->all();
-            $name = $request->input('user');
+            $us = $request->input('user');
+
+            /*$name = $request->input('user');
             $user = User::where('user', $name)->get();
             $id = $user[0]->id;
             $role = UserRole::where('user_id', $id)->get();
             $iduserType = $role[0]['role_id'];
             $userType = Role::findOrFail($iduserType); 
-            return $userType->name;
+            return $userType->name;*/
+            $rolId = DB::table('users')->where('user', $us)->value('role_id');
+            if($rolId != 0){
+                $rol = DB::table('roles')->where('id', $rolId)->value('name');
+                return $rol;
+            }
+            return "Error no se encontro el rol";          
         } catch (Exception $e) {
             return var_dump($e->getMessage());
         }
@@ -72,12 +79,11 @@ class UserController extends Controller
         try {
             $request->all();
             $user = new User;
-            $role_admin = Role::where('name', 'estudiante')->first();
             $user->user = $request->input('user');
             $user->email = $request->input('email');
+            $user->role_id = 2;
             $user->password = bcrypt($request->input('password'));            
             if($user->save()){
-                $user->roles()->attach($role_admin);
                 return 'Se guardo correctamente';              
             }
             return 'Error al guardar';
