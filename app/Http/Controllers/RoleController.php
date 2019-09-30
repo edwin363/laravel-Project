@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\User_type;
+use App\Models\Role;
 use DB;
 
 class UserTypeController extends Controller
@@ -16,9 +16,9 @@ class UserTypeController extends Controller
     public function index()
     {
         try {
-            $usertypes = DB::table('users_type')->select()->get();
-            if($usertypes->count() > 0){
-                return $usertypes;
+            $roles = DB::table('roles')->select()->get();
+            if($roles->count() > 0){
+                return $roles;
             }
             return 'No se encuentran registros';
         } catch (Exception $e) {
@@ -46,8 +46,8 @@ class UserTypeController extends Controller
     {
         try {
             $request->all();
-            $usertype = new User_type;
-            $usertype->user_type = $request->input('user_type');
+            $usertype = new Role;
+            $usertype->name = $request->input('name');
             if($usertype->save()){
                 return 'Se guardo correctamente';
             }
@@ -89,10 +89,10 @@ class UserTypeController extends Controller
     public function update(Request $request, $id)
     {
         try {
-            $territory = User_type::findOrFail($id);
+            $territory = Role::findOrFail($id);
             if($territory->count() > 0){
-                $territory->user_type = $request->input('user_type');
-                $return = DB::table('users_type')->where('id', $id)->update(['user_type' => $territory->user_type]);
+                $territory->name = $request->input('name');
+                $return = DB::table('roles')->where('id', $id)->update(['name' => $territory->user_type]);
                 if($return){
                     return 'Se actualizo correctamente';
                 }
@@ -112,9 +112,9 @@ class UserTypeController extends Controller
     public function destroy($id)
     {
         try {
-            $usertype = User_type::findOrFail($id);
+            $usertype = Role::findOrFail($id);
             if($usertype->count() > 0){
-                $return = DB::table('users_type')->where('id', '=', $id)->delete();
+                $return = DB::table('roles')->where('id', '=', $id)->delete();
                 if($return){
                     return 'Se elimino correctamente';
                 }

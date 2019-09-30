@@ -37,10 +37,10 @@ Route::put('/territories/{id}', 'TerritoryController@update');
 Route::delete('/territories/{id}', 'TerritoryController@destroy');
 
 #Rutas de la tabla users_type
-Route::get('/usertypes', 'UserTypeController@index');
-Route::post('/usertypes', 'UserTypeController@store');
-Route::put('/usertypes/{id}', 'UserTypeController@update');
-Route::delete('/usertypes/{id}', 'UserTypeController@destroy');
+Route::get('/roles', 'RoleController@index');
+Route::post('/roles', 'RoleController@store');
+Route::put('/roles/{id}', 'RoleController@update');
+Route::delete('/roles/{id}', 'RoleController@destroy');
 
 #Rutas de la tabla repositories
 Route::get('/repositories', 'Repository@index');
