@@ -81,7 +81,7 @@ class UserController extends Controller
             $user = new User;
             $user->user = $request->input('user');
             $user->email = $request->input('email');
-            $user->role_id = 2;
+            $user->role_id = $request->input('role_id');
             $user->password = bcrypt($request->input('password'));            
             if($user->save()){
                 return 'Se guardo correctamente';              

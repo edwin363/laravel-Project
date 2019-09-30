@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\Role;
 use DB;
 
-class UserTypeController extends Controller
+class RoleController extends Controller
 {
     /**
      * Display a listing of the resource.
