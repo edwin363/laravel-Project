@@ -97,3 +97,21 @@ Route::get('/profile', 'ProfileController@index');
 Route::post('/profile', 'ProfileController@store');
 Route::put('/profile/{id}', 'ProfileController@update');
 Route::delete('/profile/{id}', 'ProfileController@destroy');
+
+#Rutas de la tabla requirements
+Route::get('/requirement', 'RequirementController@index');
+Route::post('/requirement', 'RequirementController@store');
+Route::put('/requirement/{id}', 'RequirementController@update');
+Route::delete('/requirement/{id}', 'RequirementController@destroy');
+
+#Rutas de la tabla scholarship_detail
+Route::get('/scholarship_detail', 'ScholarshipDetailController@index');
+Route::post('/scholarship_detail', 'ScholarshipDetailController@store');
+Route::put('/scholarship_detail/{id}', 'ScholarshipDetailController@update');
+Route::delete('/scholarship_detail/{id}', 'ScholarshipDetailController@destroy');
+
+#Rutas de la tabla scholarships
+Route::get('/scholarship', 'ScholarshipController@index');
+Route::post('/scholarship', 'ScholarshipController@store');
+Route::put('/scholarship/{id}', 'ScholarshipController@update');
+Route::delete('/scholarship/{id}', 'ScholarshipController@destroy');
