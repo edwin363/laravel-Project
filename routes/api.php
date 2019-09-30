@@ -78,3 +78,22 @@ Route::get('/careers/university/{id}', 'CareerController@careerByUniversityId');
 Route::post('/users', 'UserController@store');
 Route::post('/login', 'UserController@login');
 Route::delete('/users/{id}', 'UserController@destroy');
+
+
+#Rutas de la tabla home 
+Route::get('/home', 'HomeController@index');
+Route::post('/home', 'HomeController@store');
+Route::put('/home/{id}', 'HomeController@update');
+Route::delete('/home/{id}', 'HomeController@destroy');
+
+#Rutas de la tabla applicants
+Route::get('/applicant', 'AplicantController@index');
+Route::post('/applicant', 'AplicantController@store');
+Route::put('/applicant/{id}', 'AplicantController@update');
+Route::delete('/applicant/{id}', 'AplicantController@destroy');
+
+#Rutas de la tabla profiles
+Route::get('/profile', 'ProfileController@index');
+Route::post('/profile', 'ProfileController@store');
+Route::put('/profile/{id}', 'ProfileController@update');
+Route::delete('/profile/{id}', 'ProfileController@destroy');
