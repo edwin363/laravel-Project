@@ -49,7 +49,8 @@ class RequirementController extends Controller
             $requirement->academic_level_id = $request->input('academic_level_id');
             $requirement->paes_note = $request->input('paes_note');
             if($requirement->save()){
-                return 'Se guardo correctamente';
+                $id = $requirement->id;
+                return $id;
             }
         }
         catch(Exception $e){

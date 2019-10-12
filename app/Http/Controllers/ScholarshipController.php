@@ -4,6 +4,9 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Scholarship;
+use App\Models\Scholarship_detail;
+use App\Models\User;
+use Illuminate\Support\Arr;
 use DB;
 class ScholarshipController extends Controller
 {
@@ -35,6 +38,20 @@ class ScholarshipController extends Controller
         //
     }
 
+    public function scholarCard(){
+        try{
+            $scholarship = DB::table('scholarships')->select()->get();
+            /*if($scholarship->count() > 0){
+                return $scholarship;
+            }*/
+
+            return $scholarship[0]->id;
+        }
+        catch(Exception $e){
+            return 'No hay registros para mostrar';
+        }
+    }
+
     /**
      * Store a newly created resource in storage.
      *
@@ -49,7 +66,7 @@ class ScholarshipController extends Controller
             $scholarship->title = $request->input('title');
             $scholarship->requirements_id = $request->input('requirements_id');
             $scholarship->scholarship_detail_id = $request->input('scholarship_detail_id');
-            $scholarship->state = $request->input('state');
+            $scholarship->state = "Activo";
             $scholarship->quotas = $request->input('quotas');
             $scholarship->scholar_id = $request->input('scholar_id');
             if($scholarship->save()){

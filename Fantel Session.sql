@@ -8,7 +8,7 @@ select * from scholarships
 /*2.3----->*/select * from universities
 /*2.3.1--->*/select * from countries
 /*2.4----->*/select * from careers
-/*2.4.1---->*/select * from universities
+/*2.4.1--->*/select * from universities
 
 /*3----->*/select * from contracts
 /*3.1---->*/select * from territories
@@ -20,3 +20,9 @@ select * from role_user
 select * from roles
 
 select * from home
+
+select * from universities;
+select * from careers;
+select * from profiles
+select * from repositories
+select * from applicants

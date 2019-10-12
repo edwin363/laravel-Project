@@ -48,9 +48,9 @@ class AcademicLevelController extends Controller
         try{
             $request->all();
             $academic = new Academic_level;
-            $academic->academic_level = $request->input('academic_level');
+            $academic->academic_level = $request->input('academic_level');            
             if($academic->save()){
-                return 'Se guardo correctamente';
+                return "Se guardo correctamente";
             }
         }
         catch(Exception $e){

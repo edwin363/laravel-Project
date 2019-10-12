@@ -53,7 +53,8 @@ class ScholarshipDetailController extends Controller
             $scholarship_detail->university_id = $request->input('university_id');
             $scholarship_detail->career_id = $request->input('career_id');
             if($scholarship_detail->save()){
-                return 'Se guardo correctamente';
+                $id = $scholarship_detail->id;
+                return $id;
             }
         }
         catch(Exception $e){

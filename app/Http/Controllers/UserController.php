@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
+use Illuminate\Support\Facades\Hash;
+// Illuminate\Support\Collection;
 use App\Models\User;
 use App\Models\Role;
 use DB;
@@ -39,20 +41,25 @@ class UserController extends Controller
         try {
             $request->all();
             $us = $request->input('user');
-
-            /*$name = $request->input('user');
-            $user = User::where('user', $name)->get();
-            $id = $user[0]->id;
-            $role = UserRole::where('user_id', $id)->get();
-            $iduserType = $role[0]['role_id'];
-            $userType = Role::findOrFail($iduserType); 
-            return $userType->name;*/
-            $rolId = DB::table('users')->where('user', $us)->value('role_id');
-            if($rolId != 0){
-                $rol = DB::table('roles')->where('id', $rolId)->value('name');
-                return $rol;
+            $pass = $request->input('password');
+            $user = DB::table('users')->select('user', 'password')->where('user', $us)->get();      
+            if(Hash::check($pass, $user[0]->password)){
+                $rolId = DB::table('users')->where('user', $us)->value('role_id');
+                if($rolId != 0){
+                    $rol = DB::table('roles')->where('id', $rolId)->value('name');
+                    return $rol;
+                }
             }
-            return "Error no se encontro el rol";          
+            return "Falso";
+        } catch (Exception $e) {
+            return var_dump($e->getMessage());
+        }
+    }
+
+    public function getUserId($us){
+        try {
+            $user = DB::table('users')->where('user', $us)->get();
+            return $user[0]->id;
         } catch (Exception $e) {
             return var_dump($e->getMessage());
         }
@@ -81,7 +88,7 @@ class UserController extends Controller
             $user = new User;
             $user->user = $request->input('user');
             $user->email = $request->input('email');
-            $user->role_id = $request->input('role_id');
+            $user->role_id = $request->input('idRol');
             $user->password = bcrypt($request->input('password'));            
             if($user->save()){
                 return 'Se guardo correctamente';              

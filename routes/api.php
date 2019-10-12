@@ -43,10 +43,10 @@ Route::put('/roles/{id}', 'RoleController@update');
 Route::delete('/roles/{id}', 'RoleController@destroy');
 
 #Rutas de la tabla repositories
-Route::get('/repositories', 'Repository@index');
-Route::post('/repositories', 'Repository@store');
-Route::put('/repositories/{id}', 'Repository@update');
-Route::delete('/repositories/{id}', 'Repository@destroy');
+Route::get('/repositories', 'RepositoryController@index');
+Route::post('/repositories', 'RepositoryController@store');
+Route::put('/repositories/{id}', 'RepositoryController@update');
+Route::delete('/repositories/{id}', 'RepositoryController@destroy');
 
 #Rutas de la tabla countries
 Route::get('/countries', 'CountryController@index');
@@ -75,10 +75,11 @@ Route::delete('/careers/{id}', 'CareerController@destroy');
 Route::get('/careers/university/{id}', 'CareerController@careerByUniversityId');
 
 #Rutas de la tabla users
+Route::get('/users', 'UserController@index');
 Route::post('/users', 'UserController@store');
 Route::post('/login', 'UserController@login');
 Route::delete('/users/{id}', 'UserController@destroy');
-
+Route::get('/users/{user}', 'UserController@getUserId');
 
 #Rutas de la tabla home 
 Route::get('/home', 'HomeController@index');
