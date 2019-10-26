@@ -18,8 +18,8 @@ class University extends Model
         return $this->hasMany('App\Models\Career');
     }
 
-    public function scholarships_detail()
+    public function scholarships()
     {
-        return $this->hasMany('App\Models\Scholarship_detail');
+        return $this->hasMany('App\Models\Scholarship');
     }
 }

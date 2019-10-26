@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreatePetitionsTable extends Migration
+class CreateContractsTypeTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,8 +13,9 @@ class CreatePetitionsTable extends Migration
      */
     public function up()
     {
-        Schema::create('petitions', function (Blueprint $table) {
+        Schema::create('contracts_type', function (Blueprint $table) {
             $table->bigIncrements('id');
+            $table->string('type_contract', 60);
             $table->timestamps();
         });
     }
@@ -26,6 +27,6 @@ class CreatePetitionsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('petitions');
+        Schema::dropIfExists('contracts_type_');
     }
 }

@@ -11,8 +11,8 @@ class Career extends Model
         return $this->belongsTo('App\Models\University');
     }
 
-    public function scholarships_detail()
+    public function scholarships()
     {
-        return $this->hasMany('App\Models\Scholarship_detail');
+        return $this->hasMany('App\Models\Scholarship');
     }
 }

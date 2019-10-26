@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Home;
+use App\Models\User;
 use DB;
 class HomeController extends Controller
 {
@@ -15,7 +16,7 @@ class HomeController extends Controller
     public function index()
     {
         try{
-            $home = DB::table('home')->select()->get();
+            $home = DB::table('home')->select()->get();            
             if($home->count() > 0){
                 return $home;
             }

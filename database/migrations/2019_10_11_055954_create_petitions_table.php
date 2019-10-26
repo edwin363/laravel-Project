@@ -15,6 +15,9 @@ class CreatePetitionsTable extends Migration
     {
         Schema::create('petitions', function (Blueprint $table) {
             $table->bigIncrements('id');
+            $table->unsignedBigInteger('id_user');
+            $table->foreign('id_user')->references('id')->on('users');
+            $table->string('state', 50);
             $table->timestamps();
         });
     }

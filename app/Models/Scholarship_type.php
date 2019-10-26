@@ -8,8 +8,8 @@ class Scholarship_type extends Model
 {
     protected $table = 'scholarships_type';
     
-    public function scholarships_detail()
+    public function scholarships()
     {
-        return $this->hasMany('App\Models\Scholarship_detail');
+        return $this->hasMany('App\Models\Scholarship');
     }
 }
