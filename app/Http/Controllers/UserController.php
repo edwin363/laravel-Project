@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Hash;
 use App\Models\User;
 use App\Models\Role;
 use DB;
+use Mail;
 
 class UserController extends Controller
 {
@@ -75,6 +76,16 @@ class UserController extends Controller
         //
     }
 
+    public static function sendEmail($id)
+    {
+        $user = User::findOrFail($id);
+
+        Mail::send('mails.email', ['user' => $user], function ($m) use ($user){
+            $m->from('fedwin363@gmail.com', 'Becatel');
+            $m->to('fedwin363@gmail.com')->subject('Verificacion de gmail');
+        });
+    }
+
     /**
      * Store a newly created resource in storage.
      *
@@ -89,9 +100,10 @@ class UserController extends Controller
             $user->user = $request->input('user');
             $user->email = $request->input('email');
             $user->role_id = 2;
-            $user->password = bcrypt($request->input('password'));            
-            if($user->save()){
-                return 'Se guardo correctamente';              
+            $user->password = bcrypt($request->input('password'));
+            if(true){
+                $this->sendEmail(2);
+                return 'Se envio un email a tu correo, verificalo para poder ingresarl al sitio';              
             }
             return 'Error al guardar';
         } catch (Exception $e) {

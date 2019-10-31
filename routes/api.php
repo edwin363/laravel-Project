@@ -116,3 +116,5 @@ Route::get('/scholarship', 'ScholarshipController@index');
 Route::post('/scholarship', 'ScholarshipController@store');
 Route::put('/scholarship/{id}', 'ScholarshipController@update');
 Route::delete('/scholarship/{id}', 'ScholarshipController@destroy');
+
+Route::get('/mail/{id}', 'UserController@sendEmail');
