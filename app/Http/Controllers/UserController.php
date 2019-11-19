@@ -10,6 +10,7 @@ use App\Models\User;
 use App\Models\Role;
 use DB;
 use Mail;
+use DateTime;
 
 class UserController extends Controller
 {
@@ -43,15 +44,15 @@ class UserController extends Controller
             $request->all();
             $us = $request->input('user');
             $pass = $request->input('password');
-            $user = DB::table('users')->select('user', 'password')->where('user', $us)->get();      
-            if(Hash::check($pass, $user[0]->password)){
+            $user = DB::table('users')->select('user', 'password', 'email_verified_at')->where('user', $us)->get();      
+            if(Hash::check($pass, $user[0]->password) && $user[0]->email_verified_at != null){
                 $rolId = DB::table('users')->where('user', $us)->value('role_id');
                 if($rolId != 0){
                     $rol = DB::table('roles')->where('id', $rolId)->value('name');
                     return $rol;
                 }
             }
-            return "Falso";
+            return 'No existe el usuario';
         } catch (Exception $e) {
             return var_dump($e->getMessage());
         }
@@ -76,16 +77,6 @@ class UserController extends Controller
         //
     }
 
-    public static function sendEmail($id)
-    {
-        $user = User::findOrFail($id);
-
-        Mail::send('mails.email', ['user' => $user], function ($m) use ($user){
-            $m->from('fedwin363@gmail.com', 'Becatel');
-            $m->to('fedwin363@gmail.com')->subject('Verificacion de gmail');
-        });
-    }
-
     /**
      * Store a newly created resource in storage.
      *
@@ -96,15 +87,18 @@ class UserController extends Controller
     {
         try {
             $request->all();
-            $user = new User;
+            $user = new User;                           
             $user->user = $request->input('user');
             $user->email = $request->input('email');
-            $user->role_id = 2;
-            $user->password = bcrypt($request->input('password'));
-            if(true){
-                $this->sendEmail(2);
+            $user->role_id = $request->input('role_id');
+            $user->password = bcrypt($request->input('password'));                
+            if($user->save()){                    
+                    Mail::send('mails.email', ['user' => $user], function ($m) use ($user){
+                    $m->from('fedwin363@gmail.com', 'Becatel');
+                    $m->to($user->email, $user->id)->subject('Verificacion de e-mail');
+                });
                 return 'Se envio un email a tu correo, verificalo para poder ingresarl al sitio';              
-            }
+            }            
             return 'Error al guardar';
         } catch (Exception $e) {
             return var_dump($e->getMessage());
@@ -143,8 +137,8 @@ class UserController extends Controller
     public function update(Request $request, $id)
     {
         try{
-            $country = User::findOrFile($id);
-            if($country->count() > 0){
+            $user = User::findOrFile($id);
+            if($user->count() > 0){
                 $user->title = $request->input('title');
                 $user->user = $request->input('user');
                 $user->state = $request->input('state');
@@ -187,6 +181,66 @@ class UserController extends Controller
             return 'No hay registros con ese id ' + $id;
         }
         catch(Exception $e){
+            return var_dump($e->getMessage());
+        }
+    }
+
+    public function timeDate(Request $request)
+    {   
+        $request->all();
+        $id = $request->input('id');
+        $users = User::findOrFail($id);                                   
+        if($users->count() > 0){
+            $rol = DB::table('roles')->where('id', $users->role_id)->value('name');
+            $state = ($rol == 'becario') ? "en proceso":"activo";
+            $dt = new DateTime();
+            $dt->format('Y-m-d H:i:s');
+            $users->email_verified_at = $dt;
+            $users->state = $state;
+            $return = DB::table('users')->where('id', $id)->update([
+                'email_verified_at' => $users->email_verified_at,
+                'state' => $users->state
+            ]);
+            if($return){
+                return $rol;
+            }            
+        }
+        return 'No hay registros con ese id ' + $id;        
+    }
+
+    public function getUsersInProcess()
+    {
+        try
+        {
+            $users = DB::table('users')->select('id', 'user', 'email', 'state')->where('state', 'en proceso')->get();
+            if($users->count() > 0){
+                return $users;
+            }
+            return 'no hay registros en proceso';
+        }
+        catch(Exeption $e)
+        {
+            return var_dump($e->getMessage());
+        }
+    }
+
+    public function acceptUser(Request $request)
+    {
+        try {
+            $request->all();
+            $id = $request->input('id');
+            $users = User::findOrFail($id);
+            $users->state = 'activo';
+            if($users->count() > 0){
+                $return = DB::table('users')->where('id', $id)->update([
+                    'state' => $users->state
+                ]);
+                if($return){
+                    return 'becario aceptado';
+                }    
+            }
+            return 'NO hay usuario con ese id ' + $id;
+        } catch (Exeption $e) {
             return var_dump($e->getMessage());
         }
     }

@@ -22,3 +22,7 @@ Route::get('/', function () {
 Route::get('/user', function () {
     return $array = Arr::add(['name' => 'Desk'], 'price', 100);
 });
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');
